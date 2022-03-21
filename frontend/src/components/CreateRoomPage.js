@@ -19,6 +19,7 @@ export default class CreateRoomPage extends Component {
       guestCanPause: true,
       votesToSkip: this.defaultVotes,
     };
+
     this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
     this.handleVotesChange = this.handleVotesChange.bind(this);
     this.handleGuestCanPauseChange = this.handleGuestCanPauseChange.bind(this);
@@ -47,18 +48,17 @@ export default class CreateRoomPage extends Component {
     };
     fetch("/api/create-room", requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => this.props.history.push("/room/" + data.code));
   }
 
   render() {
-    return (<Grid container spacing={1}>
-
+    return (
+      <Grid container spacing={1}>
         <Grid item xs={12} align="center">
           <Typography component="h4" variant="h4">
             Create A Room
           </Typography>
         </Grid>
-
         <Grid item xs={12} align="center">
           <FormControl component="fieldset">
             <FormHelperText>
@@ -84,7 +84,6 @@ export default class CreateRoomPage extends Component {
             </RadioGroup>
           </FormControl>
         </Grid>
-
         <Grid item xs={12} align="center">
           <FormControl>
             <TextField
@@ -102,7 +101,6 @@ export default class CreateRoomPage extends Component {
             </FormHelperText>
           </FormControl>
         </Grid>
-
         <Grid item xs={12} align="center">
           <Button
             color="primary"
@@ -112,14 +110,12 @@ export default class CreateRoomPage extends Component {
             Create A Room
           </Button>
         </Grid>
-
         <Grid item xs={12} align="center">
           <Button color="secondary" variant="contained" to="/" component={Link}>
             Back
           </Button>
         </Grid>
-
-    </Grid>
+      </Grid>
     );
   }
 }
